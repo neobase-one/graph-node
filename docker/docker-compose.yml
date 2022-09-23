@@ -11,8 +11,8 @@ services:
     depends_on:
       - ipfs
       - postgres
-    extra_hosts:
-      - 172.18.0.1:host-gateway
+    # extra_hosts:
+    #   - 172.18.0.1:host-gateway
     environment:
       postgres_host: postgres
       postgres_user: graph-node
@@ -50,13 +50,5 @@ services:
       - '443:443'
     volumes:
       - ./nginx:/etc/nginx/conf.d/
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
     depends_on:
       - graph-node
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
